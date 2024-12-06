@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support - BookQuest</title>
+    <link rel="stylesheet" href="/css/support.css" />
+  </head>
+  <body>
+    <header class="support-header">
+      <nav class="home-nav">
+        <div class="logo">
+          <h1><a href="/">BookQuest</a></h1>
+        </div>
+        <div class="nav-links">
+          <% if (locals.user) { %>
+          <span class="user-welcome">Welcome, <%= username.name %>!</span>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/auth/logout" class="login-btn">Logout</a>
+          <% } else { %>
+          <a href="/auth/login" class="login-btn">Login</a>
+          <a href="/register" class="register-btn">Register</a>
+          <% } %>
+        </div>
+      </nav>
+
+      <section class="support-hero">
+        <h1>How Can We Help?</h1>
+        <p>Find answers to common questions or contact our support team</p>
+      </section>
+    </header>
+
+    <main class="support-main">
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>How do I add a review?</h3>
+            <p>
+              To add a review, log in to your account, navigate to the "Manage
+              Reviews" page, and click on "Add New Review". Fill in the book
+              details and your review, then submit.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>Can I edit my reviews?</h3>
+            <p>
+              Yes! You can edit your reviews at any time by going to the "Manage
+              Reviews" page and clicking the "Edit" button next to the review
+              you want to modify.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>How is the rating system calculated?</h3>
+            <p>
+              Our rating system uses a 1-5 star scale, where 1 is the lowest and
+              5 is the highest rating you can give to a book.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section">
+        <h2>Contact Support</h2>
+        <form class="contact-form" action="/support/contact" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a topic</option>
+              <option value="account">Account Issues</option>
+              <option value="reviews">Review Problems</option>
+              <option value="technical">Technical Support</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

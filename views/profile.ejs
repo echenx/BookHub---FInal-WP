@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - BookQuest</title>
+    <link rel="stylesheet" href="/css/profile.css" />
+  </head>
+  <body>
+    <header class="profile-header">
+      <nav class="profile-nav">
+        <div class="logo">
+          <h1>BookQuest</h1>
+        </div>
+        <div class="nav-links">
+          <a href="/dashboard">Dashboard</a>
+          <a href="/support" class="support-btn">Support</a>
+          <a href="/auth/logout" class="login-btn">Logout</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="profile-main">
+      <div class="profile-container">
+        <section class="profile-sidebar">
+          <div class="profile-image">
+            <img
+              src="<%= user.avatar || '/images/default-avatar.png' %>"
+              alt="Profile Picture"
+            />
+            <form
+              action="/profile/upload-avatar"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <label for="avatar" class="upload-btn">Change Picture</label>
+              <input
+                type="file"
+                id="avatar"
+                name="avatar"
+                accept="image/*"
+                style="display: none"
+              />
+            </form>
+          </div>
+          <div class="profile-stats">
+            <h3>Reading Stats</h3>
+            <ul>
+              <li>Total Reviews: <%= stats.totalReviews %></li>
+              <li>Average Rating: <%= stats.averageRating %> ⭐</li>
+              <li>Books This Year: <%= stats.booksThisYear %></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="profile-content">
+          <div class="profile-info">
+            <h2>Profile Information</h2>
+            <form action="/profile/update" method="POST" class="profile-form">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value="<%= user.username %>"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value="<%= user.email %>"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio" rows="4">
+                <%= user.bio || '' %></textarea
+                >
+              </div>
+              <button type="submit" class="save-btn">Save Changes</button>
+            </form>
+          </div>
+
+          <div class="password-section">
+            <h2>Change Password</h2>
+            <form
+              action="/profile/change-password"
+              method="POST"
+              class="password-form"
+            >
+              <div class="form-group">
+                <label for="current-password">Current Password</label>
+                <input
+                  type="password"
+                  id="current-password"
+                  name="currentPassword"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input
+                  type="password"
+                  id="new-password"
+                  name="newPassword"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Confirm New Password</label>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  name="confirmPassword"
+                  required
+                />
+              </div>
+              <button type="submit" class="password-btn">
+                Update Password
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div class="page-background"></div>
+
+    <header>
+      <div class="dashboard-navbar">
+        <h1>BookQuest</h1>
+        <nav class="dashboard-nav">
+          <ul class="dashboard-nav-list">
+            <li><a href="/crud">Manage Reviews</a></li>
+            <li><a href="/search" class="search-btn">Search</a></li>
+            <li><a href="/auth/logout" class="login-btn">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="dashboard-container">
+        <section class="dashboard-welcome">
+          <p>Welcome, <%= user.name %>!</p>
+          <p>You are now logged in.</p>
+          <div class="user-bio">
+            <p class="bio-text"><%= user.bio || 'No bio.' %></p>
+          </div>
+        </section>
+
+        <section class="dashboard-stats">
+          <h2>Your Activity</h2>
+          <div class="dashboard-stats-grid">
+            <div class="dashboard-stat-card">
+              <h3>Total Reviews</h3>
+              <p><%= stats.totalReviews %></p>
+            </div>
+            <div class="dashboard-stat-card">
+              <h3>Top Rated Book</h3>
+              <p>"<%= stats.topBook %>"</p>
+            </div>
+            <div class="dashboard-stat-card">
+              <h3>Last Active</h3>
+              <p><%= stats.lastActive %></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-quick-links">
+          <h2>Quick Links</h2>
+          <ul class="dashboard-links-list">
+            <li><a href="/crud">Add a New Review</a></li>
+            <li><a href="/profile">Edit Profile</a></li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

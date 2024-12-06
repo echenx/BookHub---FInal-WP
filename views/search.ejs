@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookQuest - Search</title>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <header class="home-header">
+      <nav class="home-nav">
+        <div class="logo">
+          <h1>BookQuest</h1>
+        </div>
+        <div class="nav-links">
+          <% if (user) { %>
+          <span class="user-welcome">Welcome, <%= user.name %>!</span>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/auth/logout" class="login-btn">Logout</a>
+          <% } %>
+        </div>
+      </nav>
+
+      <div class="hero-section">
+        <section class="search-box">
+          <form class="search-form" action="/search/results" method="GET">
+            <div class="search-input-group">
+              <input
+                type="text"
+                name="query"
+                placeholder="Search by book title..."
+                value="<%= query || '' %>"
+                class="search-input"
+              />
+              <button type="submit" class="search-button">Search</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="search-results">
+          <% if (locals.results && results.length > 0) { %>
+          <div class="results-grid">
+            <% results.forEach(review => { %>
+            <div class="result-card">
+              <h3><%= review.title %></h3>
+              <p class="author">by <%= review.author %></p>
+              <div class="rating">Rating: <%= review.rating %>/5</div>
+              <p class="review-preview">
+                <%= review.content.substring(0, 150) %>...
+              </p>
+              <a href="/crud/<%= review._id %>" class="view-review-btn"
+                >View Full Review</a
+              >
+            </div>
+            <% }) %>
+          </div>
+          <% } else if (locals.results) { %>
+          <div class="no-results">
+            <p>No reviews found matching your search.</p>
+          </div>
+          <% } %>
+        </section>
+      </div>
+    </header>
+  </body>
+</html>

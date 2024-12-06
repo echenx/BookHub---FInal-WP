@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Reviews - BookQuest</title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/crud.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="home-header">
+      <nav class="home-nav">
+        <div class="logo">
+          <h1><a href="/">BookQuest</a></h1>
+        </div>
+        <div class="nav-links">
+          <span class="user-welcome">Welcome, <%= user.name %>!</span>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/support" class="support-btn">Support</a>
+          <a href="/auth/logout" class="login-btn">Logout</a>
+        </div>
+      </nav>
+
+      <main class="crud-container">
+        <section class="crud-section">
+          <h2>Add a New Review</h2>
+          <form action="/reviews/add" method="POST">
+            <label for="book-title">Book Title:</label>
+            <input type="text" id="book-title" name="title" required />
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required />
+
+            <label for="review">Your Review:</label>
+            <textarea id="review" name="review" required></textarea>
+
+            <label for="rating">Rating (1-5):</label>
+            <select id="rating" name="rating" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+
+            <button type="submit">Add Review</button>
+          </form>
+        </section>
+
+        <section class="crud-section">
+          <h2>Your Reviews</h2>
+          <% if (reviews && reviews.length > 0) { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Review</th>
+                <th>Rating</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% reviews.forEach((review) => { %>
+              <tr>
+                <td><%= review.title %></td>
+                <td><%= review.author %></td>
+                <td><%= review.content %></td>
+                <td><%= review.rating %></td>
+                <td class="action-buttons">
+                  <form
+                    action="/reviews/edit/<%= review.id %>"
+                    method="GET"
+                    style="display: inline"
+                  >
+                    <button type="submit">
+                      <i class="fas fa-edit"></i> Edit
+                    </button>
+                  </form>
+                  <form
+                    action="/reviews/delete/<%= review.id %>"
+                    method="POST"
+                    style="display: inline"
+                  >
+                    <button
+                      type="submit"
+                      onclick="return confirm('Are you sure you want to delete this review?')"
+                    >
+                      <i class="fas fa-trash"></i> Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <% } else { %>
+          <p>You have not written any reviews yet.</p>
+          <% } %>
+        </section>
+      </main>
+    </header>
+  </body>
+</html>

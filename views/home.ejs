@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookQuest</title>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <header class="home-header">
+      <nav class="home-nav">
+        <div class="logo">
+          <h1>BookQuest</h1>
+        </div>
+        <div class="nav-links">
+          <% if (locals.user) { %>
+          <span class="user-welcome">Welcome, <%= username.name %>!</span>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/support" class="support-btn">Support</a>
+          <a href="/auth/logout" class="login-btn">Logout</a>
+          <% } else { %>
+          <a href="/support" class="support-btn">Support</a>
+          <a href="/auth/login" class="login-btn">Login</a>
+          <a href="/register" class="register-btn">Register</a>
+          <% } %>
+        </div>
+      </nav>
+      <div class="hero-section">
+        <h2>Share Your Reading Journey</h2>
+        <p>
+          Join our community of book lovers and share your thoughts on your
+          favorite reads.
+        </p>
+      </div>
+    </header>
+
+    <main class="home-main">
+      <section class="features">
+        <h2>Why Join Us?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>Track Your Books</h3>
+            <p>Keep a personal library of all your read books and reviews.</p>
+          </div>
+
+          <section class="cta-section">
+            <h2>Ready to Start?</h2>
+            <p>
+              Create your account today and begin sharing your book reviews!
+            </p>
+            <div class="cta-buttons">
+              <a href="/register" class="cta-primary">Sign Up Now</a>
+              <a href="/auth/login" class="cta-secondary"
+                >Already have an account?</a
+              >
+            </div>
+          </section>
+
+          <div class="feature-card">
+            <h3>Search Reviews</h3>
+            <p>
+              Discover what others think about books and find your next great
+              read.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

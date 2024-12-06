@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results - BookQuest</title>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <header class="home-header">
+      <nav class="home-nav">
+        <div class="logo">
+          <h1>BookQuest</h1>
+        </div>
+        <div class="nav-links">
+          <% if (locals.user) { %>
+          <span class="user-welcome">Welcome, <%= user.name %>!</span>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/search">Search</a>
+          <a href="/support" class="support-btn">Support</a>
+          <a href="/auth/logout" class="login-btn">Logout</a>
+          <% } else { %>
+          <a href="/support" class="support-btn">Support</a>
+          <a href="/auth/login" class="login-btn">Login</a>
+          <a href="/register" class="register-btn">Register</a>
+          <% } %>
+        </div>
+      </nav>
+
+      <div class="hero-section">
+        <h2 class="results-title">Search Results for "<%= query %>"</h2>
+
+        <% if (results && results.length > 0) { %>
+        <div class="results-grid">
+          <% results.forEach(review => { %>
+          <div class="result-card">
+            <h3><%= review.title %></h3>
+            <p class="author">by <%= review.author %></p>
+            <div class="rating">Rating: <%= review.rating %>/5</div>
+            <p class="review-preview">
+              <%= review.content.substring(0, 150) %>
+            </p>
+          </div>
+          <% }) %>
+        </div>
+        <% } else { %>
+        <div class="no-results">
+          <p>No reviews found matching your search.</p>
+          <a href="/search" class="back-to-search">Back to Search</a>
+        </div>
+        <% } %>
+      </div>
+    </header>
+  </body>
+</html>

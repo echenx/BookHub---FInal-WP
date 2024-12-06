@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Review</title>
+    <link rel="stylesheet" href="/css/crud.css">
+</head>
+<body>
+    <header>
+        <h1>Edit Review</h1>
+        <p>Welcome, <%= user.name %>!</p>
+        <a href="/crud">Back to Reviews</a>
+    </header>
+
+    <main>
+        <section>
+            <form action="/reviews/edit/<%= review.id %>" method="POST">
+                <label for="book-title">Book Title:</label>
+                <input type="text" id="book-title" name="title" value="<%= review.title %>" required>
+
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" value="<%= review.author %>" required>
+
+                <label for="review">Your Review:</label>
+                <textarea id="review" name="review" required><%= review.content %></textarea>
+
+                <label for="rating">Rating (1-5):</label>
+                <select id="rating" name="rating" required>
+                    <% for(let i = 1; i <= 5; i++) { %>
+                        <option value="<%= i %>" <%= review.rating == i ? 'selected' : '' %>><%= i %></option>
+                    <% } %>
+                </select>
+
+                <button type="submit">Update Review</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html> 
